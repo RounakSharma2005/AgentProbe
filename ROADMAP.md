@@ -1,0 +1,171 @@
+# Roadmap
+
+CheckAgent is being built in public. Here's where we're headed.
+
+## Phase 1: Ship Something People Love
+
+### Milestone 0: Foundation + Demo (Complete)
+- [x] Core types (`AgentRun`, `Step`, `ToolCall`, `AgentInput`, `StreamEvent`, `Score`)
+- [x] `AgentAdapter` protocol (async-first)
+- [x] `GenericAdapter` for any Python callable
+- [x] pytest plugin with `@pytest.mark.agent_test` marker
+- [x] `checkagent init` CLI
+- [x] `checkagent demo` — zero-config, no API keys, < 30 seconds
+- [x] `checkagent run` — thin pytest wrapper
+- [x] CI on Linux, macOS, Windows
+- [x] PyPI v0.0.1-alpha (version set, publish workflow ready)
+
+### Milestone 1: Mock Layer + Fault Injection
+- [x] `MockLLM` with pattern-based responses and streaming mode
+- [x] `MockTool` with schema validation and call recording
+- [x] Fault injection (`ca_fault`): timeouts, rate limits, malformed responses
+- [x] Structured output assertions (Pydantic, JSON Schema)
+- [x] Multi-turn conversation fixture (`ca_conversation`)
+- [x] Streaming support: `StreamCollector`, `ca_stream_collector`, stream event assertions
+- [x] MCP-aware mock server
+- [x] PyPI v0.1.0 — **public alpha**
+
+## Phase 2: Make It Useful for Real Agents
+
+### Milestone 2: Evaluation Metrics + GitHub Action
+- [x] Task completion, tool correctness, step efficiency metrics
+- [x] Golden dataset loader with schema validation
+- [x] Aggregate scoring and regression detection
+- [x] Token tracking and cost reporting
+- [x] Custom evaluator plugin interface
+- [x] GitHub Action for `checkagent scan` with SARIF upload to GitHub Code Scanning
+- [x] PyPI v0.2.0
+
+### Milestone 3: Safety Testing + CI/CD
+- [x] Safety marker with OWASP LLM Top 10 taxonomy
+- [x] Built-in evaluators: prompt injection, PII leakage, system prompt leak, tool boundary, refusal compliance
+- [x] Attack probe library — 68 probe templates (injection, jailbreak, PII, scope)
+- [x] GitHub Action with quality gates and PR comments
+- [x] Compliance report generation
+- [x] JUnit XML output for CI dashboards
+- [x] PyPI v0.3.0
+
+## Phase 3: Make It Complete
+
+### Milestone 4: Record-and-Replay
+- [x] Versioned JSON cassettes with stream support
+- [x] Replay engine with configurable matching
+- [x] Cassette migration tooling
+- [x] PyPI v0.4.0
+
+### Milestone 5: LLM-as-Judge
+- [x] Rubric-based evaluation
+- [x] Statistical assertions (PASS/FAIL/INCONCLUSIVE)
+- [x] Multi-judge consensus
+- [x] PyPI v0.5.0
+
+### Milestone 6: Framework Adapters + Production Loop
+- [x] LangChain adapter
+- [x] OpenAI Agents SDK adapter
+- [x] CrewAI, PydanticAI, Anthropic adapters
+- [x] Production trace import (JSON/JSONL, OpenTelemetry, Langfuse API, Phoenix API)
+- [x] PyPI v1.0.0
+
+### Milestone 7: Multi-Agent + Ecosystem
+- [x] Multi-agent trace capture and handoff testing
+- [x] Credit assignment heuristics
+- [x] PyPI v1.1.0
+
+## Phase 4: Launch Readiness
+
+### Milestone 8: Onboarding Polish (Complete)
+- [x] `checkagent init` generates tests that pass on a clean install
+- [x] Strict Pydantic types prevent silent field drops (`extra="forbid"`)
+- [x] All dependencies declared correctly
+- [x] `pip install checkagent && checkagent init && pytest` works end-to-end
+
+### Milestone 9: Documentation Site (Complete)
+- [x] MkDocs Material with GitHub Pages
+- [x] Quickstart guide
+- [x] Layer guides (Mock, Replay, Eval, Judge)
+- [x] Safety testing guide
+- [x] CLI + config reference
+- [x] API reference (auto-generated via mkdocstrings, 173 symbols across 8 pages)
+- [x] Docs site deployed to GitHub Pages
+
+### Milestone 10: One-Command Safety Scan
+- [x] `checkagent scan` — point at any agent, get a safety report
+- [x] HTTP endpoint scanning (`--url`) — scan agents in any language via HTTP
+- [x] Generate pytest tests from scan findings (`--generate-tests`)
+- [x] HTML compliance report export (`--report report.html`)
+- [x] Execution trace display — intercepted LLM/tool calls shown inline with findings
+- [x] Interactive TUI with drill-down results (`--interactive` flag: j/k navigate, Enter expand)
+
+### Milestone 11: Framework Validation
+- [x] Test adapters against real framework agents (not just mocks)
+- [x] Verified support for LangChain (FakeListChatModel, FakeMessagesListChatModel)
+- [x] Verified support for PydanticAI (TestModel, tool calling, structured output)
+- [x] Verified support for OpenAI Agents SDK (FakeModel, tool calling, streaming)
+
+### Milestone 12: CI/CD Polish
+- [x] Quality gates auto-enforce from config (`scan_gates:` in `checkagent.yml`)
+- [x] PR comment generation (`checkagent scan --comment-file comment.md`)
+- [x] `checkagent ci-init` for easy CI setup
+
+### Milestone 13: v0.2.0 Launch
+- [x] PyPI v0.2.0 published
+- [x] All README examples verified working
+- [x] Docs site live
+- [x] 3+ framework adapters validated with real agents
+- [x] Fixture naming matches branding (`ca_` prefix)
+- [x] Async auto-configuration (zero-config pytest-asyncio)
+- [x] asyncio fix included in v0.3.x series
+- [x] Demo animation on README (terminal recording)
+- [x] End-to-end validation from clean `pip install`
+
+## Phase 5: Make It Discoverable
+
+### Milestone 14: First Impression Fixes
+- [x] `checkagent init` generates tests that pass with no manual setup
+- [x] `checkagent scan --generate-tests` produces runnable tests for HTTP endpoint targets
+- [x] Evaluator distinguishes refusal from compliance — behavioral mode, not only regex
+- [x] PyPI v0.3.0 published with all current fixes
+- [x] End-to-end: `pip install checkagent && checkagent demo && checkagent init && pytest` all pass
+
+### Milestone 15: Browser Safety Playground
+- [x] Browser-based safety scan: paste system prompt, get OWASP report instantly
+- [x] Zero install — runs entirely in the browser, API keys stay local
+- [x] Shareable safety score link via URL hash encoding
+- [x] Deployed on GitHub Pages alongside docs
+
+### Milestone 16: Playground Enhancement
+- [x] LLM-powered semantic analysis in browser (optional API key, no backend required)
+- [x] Embeddable safety score badge for any GitHub README
+- [x] Shareable result card with PNG download for social sharing
+- [x] One-click test file generation from browser scan results
+
+### Milestone 17: Zero-Config Evaluation
+- [x] Safety badges: embed your agent's safety score in any README (`checkagent scan --badge`)
+- [x] `--llm-judge claude-code`: eval and judge layers without a separate API key (uses local Claude Code CLI)
+- [x] Auto-instrumentation: `ca_tracer` fixture and `install_patches()` capture OpenAI/Anthropic LLM calls automatically
+
+### Milestone 18: Launch Hardening
+- [x] Safe trace import: screen imported traces for PII/security issues before encoding as expected behavior
+- [x] `ci-init` generates scan step with `--repeat 3` and best-practice comments
+- [x] Demo recording refresh: updated terminal animation showing scan findings and TUI drill-down
+- [x] README positioning update for current competitive landscape
+
+### Milestone 19: Real-Agent Validation
+- [x] Scan results on 3+ real open-source agents from different frameworks
+- [x] Example configurations for LangChain, OpenAI Agents SDK, and PydanticAI agents
+- [x] Performance benchmarks: scan time, memory usage, overhead on real agents
+- [x] v0.4.0 published to PyPI with all hardening fixes
+
+### Milestone 20: Safety CI Intelligence
+- [x] `checkagent diff --min-score` — gate CI on safety score threshold
+- [x] `checkagent diff --min-stability` — gate CI on stability threshold (requires `--repeat N` scans)
+- [x] `checkagent scan --report FILE` — generate HTML compliance report from scan results
+- [x] Local scan history dashboard (`checkagent dashboard`)
+- [x] Production trace import from Langfuse and Phoenix APIs
+
+### Future
+- [ ] Production trace import from more providers
+
+---
+
+Want to help? Check out [CONTRIBUTING.md](CONTRIBUTING.md) and look for issues labeled `good first issue`.

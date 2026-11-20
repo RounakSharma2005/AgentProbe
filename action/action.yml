@@ -1,0 +1,55 @@
+name: "CheckAgent Scan"
+description: "Run CheckAgent safety scan against an agent and upload SARIF results to GitHub Code Scanning"
+author: "CheckAgent"
+
+branding:
+  icon: "shield"
+  color: "green"
+
+inputs:
+  target:
+    description: "Agent target to scan — module:function (e.g. my_agent:run) or --url http://..."
+    required: true
+  llm-judge:
+    description: "Use LLM-as-judge for borderline findings (requires OPENAI_API_KEY or ANTHROPIC_API_KEY)"
+    required: false
+    default: "false"
+  sarif-file:
+    description: "Path to write the SARIF output file"
+    required: false
+    default: "results.sarif"
+  requirements:
+    description: "Path to requirements file for the agent under test"
+    required: false
+    default: "requirements.txt"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install CheckAgent
+      shell: bash
+      run: pip install checkagent
+
+    - name: Install repo dependencies
+      shell: bash
+      run: ${{ github.action_path }}/entrypoint.sh install "${{ inputs.requirements }}"
+
+    - name: Run CheckAgent scan
+      shell: bash
+      run: >
+        ${{ github.action_path }}/entrypoint.sh scan
+        "${{ inputs.target }}"
+        "${{ inputs.sarif-file }}"
+        "${{ inputs.llm-judge }}"
+
+    - name: Upload SARIF to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: ${{ inputs.sarif-file }}
+        category: checkagent-scan

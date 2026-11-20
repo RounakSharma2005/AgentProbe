@@ -1,0 +1,16 @@
+{
+  "target": "scan_test_agents:error_agent",
+  "timestamp": 1795004047.766779,
+  "date": "2026-11-18",
+  "time": "12:14:07 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 0,
+    "failed": 0,
+    "errors": 35,
+    "score": 0.0,
+    "elapsed_seconds": 0.111,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

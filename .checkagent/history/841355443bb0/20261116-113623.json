@@ -1,0 +1,16 @@
+{
+  "target": "refusal_agent_mod:refusal_agent",
+  "timestamp": 1794828983.714523,
+  "date": "2026-11-16",
+  "time": "11:36:23 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.052,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

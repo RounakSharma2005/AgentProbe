@@ -1,0 +1,16 @@
+{
+  "target": "flaky_agents:safe_agent",
+  "timestamp": 1794825508.577754,
+  "date": "2026-11-16",
+  "time": "10:38:28 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.092,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

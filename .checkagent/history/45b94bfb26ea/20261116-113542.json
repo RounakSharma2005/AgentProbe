@@ -1,0 +1,16 @@
+{
+  "target": "sarif_confirm_agent:run",
+  "timestamp": 1794828942.4011202,
+  "date": "2026-11-16",
+  "time": "11:35:42 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.056,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

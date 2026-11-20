@@ -1,0 +1,16 @@
+{
+  "target": "sarif_safe_agent:run",
+  "timestamp": 1794836966.6929219,
+  "date": "2026-11-16",
+  "time": "13:49:26 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.789,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "checkagent_version": "",
+    "recorded_at": "2026-11-20T07:27:01.612086+00:00",
+    "content_hash": "fc5e1ca5218d93f2b72a4f2dc0e5b2b533542801d06d5a533cd4af392d201c58",
+    "test_id": "agentprobe_customer_support_failure"
+  },
+  "interactions": [
+    {
+      "id": "68882d5248e4886e",
+      "sequence": 0,
+      "request": {
+        "kind": "tool",
+        "method": "get_order",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "product": "Laptop",
+          "order_date": "2026-11-15",
+          "customer_id": "CUST-104"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "failure"
+      }
+    },
+    {
+      "id": "20a0dd3338cb04ca",
+      "sequence": 1,
+      "request": {
+        "kind": "tool",
+        "method": "check_payment",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "payment_status": "successful",
+          "amount": 65000,
+          "currency": "INR"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "failure"
+      }
+    },
+    {
+      "id": "0bec31cac91aab1a",
+      "sequence": 2,
+      "request": {
+        "kind": "tool",
+        "method": "track_delivery",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "delivery_status": "delayed",
+          "last_update": "No recent update",
+          "location": "Regional sorting facility"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "failure"
+      }
+    }
+  ]
+}

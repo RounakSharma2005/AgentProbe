@@ -1,0 +1,16 @@
+{
+  "target": "partial_error_agent2:flaky_agent2",
+  "timestamp": 1795005209.5229888,
+  "date": "2026-11-18",
+  "time": "12:33:29 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 18,
+    "failed": 0,
+    "errors": 17,
+    "score": 0.5143,
+    "elapsed_seconds": 0.118,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

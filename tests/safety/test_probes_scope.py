@@ -1,0 +1,91 @@
+"""Tests for scope boundary attack probes (F11.3)."""
+
+from __future__ import annotations
+
+from checkagent.safety.probes import Probe, ProbeSet, scope
+from checkagent.safety.taxonomy import SafetyCategory
+
+
+class TestScopeBoundaryProbes:
+    def test_probe_count(self):
+        assert len(scope.boundary) >= 6
+
+    def test_all_have_names(self):
+        for probe in scope.boundary:
+            assert probe.name, f"Probe missing name: {probe.input[:40]}"
+
+    def test_all_have_off_topic_category(self):
+        for probe in scope.boundary:
+            assert probe.category == SafetyCategory.OFF_TOPIC
+
+    def test_all_have_boundary_tag(self):
+        for probe in scope.boundary:
+            assert "boundary" in probe.tags, f"{probe.name} missing 'boundary' tag"
+
+    def test_all_have_nonempty_input(self):
+        for probe in scope.boundary:
+            assert len(probe.input) > 0
+
+    def test_unique_names(self):
+        names = [p.name for p in scope.boundary]
+        assert len(names) == len(set(names)), "Duplicate probe names"
+
+    def test_severity_distribution(self):
+        severities = {p.severity for p in scope.boundary}
+        assert len(severities) >= 2
+
+    def test_action_vs_topic_tags(self):
+        """Should have both action and topic boundary probes."""
+        all_tags = set()
+        for probe in scope.boundary:
+            all_tags.update(probe.tags)
+        assert "action" in all_tags
+        assert "topic" in all_tags
+
+    def test_high_risk_domain_probes_have_expected_behavior(self):
+        expected = {
+            "bank-transfer": "no_unauthorized_financial_transaction",
+            "medical-diagnosis": "no_definitive_diagnosis",
+            "financial-advice": "no_personalized_financial_advice",
+        }
+        by_name = {probe.name: probe for probe in scope.boundary}
+        for name, behavior in expected.items():
+            assert by_name[name].expected_behavior == behavior
+
+    def test_parametrize_compatible(self):
+        params = scope.boundary.all()
+        assert isinstance(params, ProbeSet)
+        assert all(isinstance(p, Probe) for p in params)
+
+    def test_all_probes_equals_boundary(self):
+        assert len(scope.all_probes) == len(scope.boundary)
+
+    def test_no_name_collisions_across_modules(self):
+        from checkagent.safety.probes import groundedness, injection, jailbreak, pii
+        all_names = [
+            {p.name for p in injection.all_probes},
+            {p.name for p in jailbreak.all_probes},
+            {p.name for p in pii.all_probes},
+            {p.name for p in scope.all_probes},
+            {p.name for p in groundedness.all_probes},
+        ]
+        combined = set()
+        for name_set in all_names:
+            overlap = combined & name_set
+            assert not overlap, f"Name collisions: {overlap}"
+            combined |= name_set
+
+
+class TestTotalProbeCount:
+    """F11.3 requires 50+ total probe templates."""
+
+    def test_total_across_all_modules(self):
+        from checkagent.safety.probes import groundedness, injection, jailbreak, pii
+        total = (
+            len(injection.all_probes)
+            + len(jailbreak.all_probes)
+            + len(pii.all_probes)
+            + len(scope.all_probes)
+            + len(groundedness.all_probes)
+        )
+        assert total >= 50, f"Only {total} probes, need 50+"

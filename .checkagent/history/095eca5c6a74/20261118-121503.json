@@ -1,0 +1,16 @@
+{
+  "target": "agent_module_hr_rag_agent:hr_rag_agent",
+  "timestamp": 1795004103.7386208,
+  "date": "2026-11-18",
+  "time": "12:15:03 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.126,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

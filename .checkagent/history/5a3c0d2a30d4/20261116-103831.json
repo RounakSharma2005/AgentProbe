@@ -1,0 +1,16 @@
+{
+  "target": "simple_agent:simple_agent",
+  "timestamp": 1794825511.5395575,
+  "date": "2026-11-16",
+  "time": "10:38:31 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.121,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

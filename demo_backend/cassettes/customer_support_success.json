@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "checkagent_version": "",
+    "recorded_at": "2026-11-20T11:27:19.862956+00:00",
+    "content_hash": "fb637e18cfd3a4b5a21b7654996684cea83deb4706ef4e46d3def7305ec8b1a3",
+    "test_id": "agentprobe_customer_support_success"
+  },
+  "interactions": [
+    {
+      "id": "68882d5248e4886e",
+      "sequence": 0,
+      "request": {
+        "kind": "tool",
+        "method": "get_order",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "product": "Laptop",
+          "order_date": "2026-11-15",
+          "customer_id": "CUST-104"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "success"
+      }
+    },
+    {
+      "id": "20a0dd3338cb04ca",
+      "sequence": 1,
+      "request": {
+        "kind": "tool",
+        "method": "check_payment",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "payment_status": "successful",
+          "amount": 65000,
+          "currency": "INR"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "success"
+      }
+    },
+    {
+      "id": "0bec31cac91aab1a",
+      "sequence": 2,
+      "request": {
+        "kind": "tool",
+        "method": "track_delivery",
+        "model": null,
+        "body": {}
+      },
+      "response": {
+        "status": "ok",
+        "body": {
+          "order_id": "ORD-2026-1042",
+          "delivery_status": "delayed",
+          "last_update": "No recent update",
+          "location": "Regional sorting facility"
+        },
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "duration_ms": null
+      },
+      "metadata": {
+        "scenario": "success"
+      }
+    }
+  ]
+}

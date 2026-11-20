@@ -1,0 +1,16 @@
+{
+  "target": "agent_module_triage_agent:triage_agent",
+  "timestamp": 1795004499.53736,
+  "date": "2026-11-18",
+  "time": "12:21:39 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.161,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

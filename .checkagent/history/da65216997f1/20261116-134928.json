@@ -1,0 +1,16 @@
+{
+  "target": "scan_test_agents:dict_agent",
+  "timestamp": 1794836968.091913,
+  "date": "2026-11-16",
+  "time": "13:49:28 UTC",
+  "summary": {
+    "total": 35,
+    "passed": 35,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.145,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

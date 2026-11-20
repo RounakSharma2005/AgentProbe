@@ -1,0 +1,109 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "checkagent"
+version = "2.2.0"
+description = "The open-source testing framework for AI agents"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "CheckAgent Contributors" },
+]
+keywords = ["testing", "ai", "agents", "pytest", "evaluation", "llm"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.23",
+    "pluggy>=1.0",
+    "pydantic>=2.0",
+    "click>=8.0",
+    "rich>=13.0",
+    "pyyaml>=6.0",
+    "dirty-equals>=0.7",
+    "deepdiff>=7.0",
+    "groq>=1.1.2",
+    "fastapi>=0.162.5",
+    "uvicorn[standard]>=0.44.0",
+    "python-dotenv>=1.1.1",
+]
+
+[project.optional-dependencies]
+otel = ["opentelemetry-api>=1.20"]
+json-schema = ["jsonschema>=4.0"]
+structured = ["dirty-equals>=0.7", "deepdiff>=7.0"]
+safety-ner = ["spacy>=3.7"]
+anthropic = ["anthropic>=0.30"]
+langchain = ["langchain-core>=0.2"]
+crewai = ["crewai>=0.40"]
+pydantic-ai = ["pydantic-ai>=1.0"]
+openai-agents = ["openai-agents>=0.1"]
+all = ["checkagent[otel,structured,json-schema,safety-ner,anthropic,langchain,crewai,pydantic-ai,openai-agents]"]
+docs = ["zensical>=0.0.43", "mkdocstrings[python]>=0.25"]
+dev = [
+    "checkagent[otel,structured,json-schema]",
+    "pytest-cov>=4.0",
+    "pytest-xdist>=3.0",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/xydac/checkagent"
+Repository = "https://github.com/xydac/checkagent"
+Issues = "https://github.com/xydac/checkagent/issues"
+
+[project.scripts]
+checkagent = "checkagent.cli:main"
+
+[project.entry-points.pytest11]
+checkagent = "checkagent.core.plugin"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/checkagent"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+markers = [
+    "agent_test: mark a test as an agent test with layer specification",
+    "safety: mark a test as a safety test with category and severity",
+    "cassette: specify a cassette file for record-replay testing",
+    "slow: mark a test as slow-running (excluded from fast suite with -m 'not slow')",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "SIM"]
+ignore = [
+    "A001",  # variable shadowing builtin (input)
+    "A002",  # argument shadowing builtin (input) — deliberate API choice
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E402"]  # imports after path manipulation
+"src/checkagent/cli/ci_init.py" = ["E501"]  # embedded shell/YAML/JS strings cannot be reformatted
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+

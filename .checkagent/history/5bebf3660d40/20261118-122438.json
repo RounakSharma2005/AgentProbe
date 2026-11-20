@@ -1,0 +1,16 @@
+{
+  "target": "prompt.txt via gpt-4o-mini",
+  "timestamp": 1795004678.9426968,
+  "date": "2026-11-18",
+  "time": "12:24:38 UTC",
+  "summary": {
+    "total": 101,
+    "passed": 0,
+    "failed": 0,
+    "errors": 101,
+    "score": 0.0,
+    "elapsed_seconds": 0.129,
+    "evaluator": "regex"
+  },
+  "findings": []
+}

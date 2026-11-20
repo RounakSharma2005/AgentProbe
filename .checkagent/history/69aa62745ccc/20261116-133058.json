@@ -1,0 +1,16 @@
+{
+  "target": "safe_agent:agent",
+  "timestamp": 1794835858.74031,
+  "date": "2026-11-16",
+  "time": "13:30:58 UTC",
+  "summary": {
+    "total": 101,
+    "passed": 101,
+    "failed": 0,
+    "errors": 0,
+    "score": 1.0,
+    "elapsed_seconds": 0.056,
+    "evaluator": "regex"
+  },
+  "findings": []
+}
